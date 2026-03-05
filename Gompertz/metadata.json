@@ -1,0 +1,45 @@
+{
+  "n_components": 0.95,
+  "image_size": [
+    224,
+    224
+  ],
+  "normalize_mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "normalize_std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "models": {
+    "model1": {
+      "filters_first": 32,
+      "file": "cnn_model_32filters.keras"
+    },
+    "model2": {
+      "filters_first": 64,
+      "file": "cnn_model_64filters.keras"
+    },
+    "model3": {
+      "filters_first": 48,
+      "file": "cnn_model_48filters.keras"
+    }
+  },
+  "best_thresholds": {
+    "model1": 0.44,
+    "model2": 0.56,
+    "model3": 0.16
+  },
+  "ensemble": {
+    "method": "Gompertz",
+    "top": 2
+  },
+  "classes": [
+    0,
+    1
+  ],
+  "date_trained": "2025-03"
+}

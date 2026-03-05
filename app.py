@@ -236,9 +236,7 @@ label { color: var(--muted) !important; font-size: 0.75rem !important; font-fami
 # ── Helper ────────────────────────────────────────────────────────────────────
 CLASS_NAMES = {
     0: ("No Tumor",        "result-benign",    "🟢"),
-    1: ("Glioma",          "result-malignant", "⚠️"),
-    2: ("Meningioma",      "result-malignant", "⚠️"),
-    3: ("Pituitary Tumor", "result-unknown",   "🟡"),
+    1: ("Tumor",          "result-malignant", "⚠️"),
 }
 
 def get_class_info(cls: int):

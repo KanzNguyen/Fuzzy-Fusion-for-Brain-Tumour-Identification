@@ -12,6 +12,10 @@ This repository contains training and inference code for binary classification o
 
 > ⚠️ Research prototype for medical-AI research and educational use; **not intended for clinical use.** Input images must be single-slice axial, skull-stripped MRI scans.
 
+| Interface | Result |
+|:---:|:---:|
+| ![Demo — interface](docs/demo_interface.png) | ![Demo — result](docs/demo_result.png) |
+
 ---
 
 ## Repository Structure

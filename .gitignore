@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Model weights hosted on Google Drive (see README)
+**/pca_model.joblib
+
+# Env / OS
+.env
+.DS_Store
+test-env/
+.venv/

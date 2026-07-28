@@ -1,0 +1,52 @@
+# ── Stage 1: Builder ──────────────────────────────────────────────────────────
+FROM python:3.10-slim AS builder
+
+WORKDIR /app
+
+# System deps for building wheels (torch, opencv, etc.)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libglib2.0-0 \
+    libsm6 \
+    libxrender1 \
+    libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-api.txt .
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir -r requirements-api.txt
+
+# ── Stage 2: Runtime ──────────────────────────────────────────────────────────
+FROM python:3.10-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 \
+    libsm6 \
+    libxrender1 \
+    libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy installed packages from builder
+COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+# Copy source code
+COPY inference.py main.py ./
+
+COPY Gompertz/ /app/models/Gompertz/
+COPY Mitscherlich/ /app/models/Mitscherlich/
+COPY SVM/ /app/models/SVM/
+
+# Model files are mounted via volume (see docker-compose.yml)
+# Directory structure expected inside container:
+#   /app/models/Gompertz/
+#   /app/models/Mitscherlich/
+#   /app/models/SVM/
+
+EXPOSE 8000
+
+#CMD ["main.handler"]
+CMD ["python", "-m", "awslambdaric", "main.handler"]
+#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

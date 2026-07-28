@@ -1,0 +1,19 @@
+# FastAPI + server
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+mangum==0.17.0
+awslambdaric==2.0.8
+
+# ML / inference
+torch==2.3.0
+torchvision==0.18.0
+tensorflow-cpu==2.16.1
+scikit-learn==1.4.2
+joblib==1.4.2
+numpy==1.26.4
+Pillow==10.3.0
+
+# Image preprocessing (skull-strip crop)
+opencv-python-headless==4.9.0.80
+imutils==0.5.4

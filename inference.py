@@ -223,7 +223,7 @@ def inference(image, method: str) -> dict:
         method          (str)
         prediction      (str)   "No Tumor" hoặc "Tumor"
         predicted_class (int)   0 hoặc 1
-        confidence      (float) xác suất dự đoán [0, 1]
+        confidence      (float) xác suất dự đoán [0, 1]find . -name "*.keras" -o -name "svm_model.joblib" | xargs ls -lhgit add .
     """
     if method not in BASE_DIR:
         raise ValueError(

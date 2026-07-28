@@ -1,7 +1,4 @@
-version: "3.9"
-
 services:
-
   # ── FastAPI inference API ──────────────────────────────────────────────────
   api:
     build:
@@ -12,22 +9,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # Mount your model folders into the container.
-      # Left side  = path on YOUR machine (edit these!)
-      # Right side = path the code expects inside the container
-      - ./models/Gompertz:/app/models/Gompertz:ro
-      - ./models/Mitscherlich:/app/models/Mitscherlich:ro
-      - ./models/SVM:/app/models/SVM:ro
+      - ./models:/app/models:ro
     environment:
       - PYTHONUNBUFFERED=1
-    # Uncomment the lines below if you have an NVIDIA GPU + nvidia-container-toolkit:
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: 1
-    #           capabilities: [gpu]
 
   # ── Streamlit frontend ─────────────────────────────────────────────────────
   ui:
@@ -38,7 +22,6 @@ services:
     restart: unless-stopped
     ports:
       - "8501:8501"
-    # When running inside Docker, the UI talks to the API via the service name
     environment:
       - API_BASE_URL=http://api:8000
     depends_on:

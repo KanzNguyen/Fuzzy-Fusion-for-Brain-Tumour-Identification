@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 from PIL import Image
 import io
+import os
 import base64
 
 # ── Page config ────────────────────────────────────────────────────────────────
@@ -283,12 +284,13 @@ st.markdown("""
 # ── Sidebar: API config ────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### ⚙️ API Configuration")
+    default_api = os.environ.get("API_BASE_URL", "http://localhost:8000")
     api_base = st.text_input(
         "API Base URL",
-        #value="http://localhost:8000",
-        value="https://guuk5jla66hsntgvppn4tdrhkq0ggxyv.lambda-url.eu-north-1.on.aws",
+        value=default_api,
         help="Base URL of the FastAPI server",
     )
+
     st.markdown("---")
     st.markdown("""
     <div style="font-family:'Space Mono',monospace; font-size:0.72rem; color:#5c6278; line-height:1.7">

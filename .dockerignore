@@ -1,0 +1,9 @@
+models/
+*.ipynb
+docs/
+.git/
+.gitignore
+__pycache__/
+*.pyc
+README.md
+build.log
